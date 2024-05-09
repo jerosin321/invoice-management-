@@ -1,0 +1,89 @@
+const tBody = document.getElementById("table-body");
+
+addNewRow = () => {
+    const row = document.createElement("tr");
+    row.className = "single-row";
+    row.innerHTML = `<td><input type="text" placeholder="Product name" class="product" id="product"></td>
+                    <td><input type="number" placeholder="0" name="unit" class="unit" id="unit" onkeyup="getInput()"></td>
+                    <td><input type="number" placeholder="0" name="price" class="price" id="price" onkeyup="getInput()"></td>
+                    <td><input type="number" placeholder="0" name="amount" class="amount" id="amount" disabled></td>
+                    <td style="text-align: right;"><span class="material-icons" action="delete">delete_outline</span></td>`
+
+    tBody.insertBefore(row, tBody.lastElementChild.previousSibling);
+}
+
+document.getElementById("add-row").addEventListener("click", (e) => {
+    e.preventDefault();
+    addNewRow();
+});
+
+//GET INPUTS, MULTIPLY AND GET THE ITEM PRICE
+getInput = () => {
+    var rows = document.querySelectorAll("tr.single-row");
+    rows.forEach((currentRow) => {
+        var unit = currentRow.querySelector("#unit").value;
+        var price = currentRow.querySelector("#price").value;
+
+        amount = unit * price;
+        currentRow.querySelector("#amount").value = amount;
+        overallSum();
+
+    })
+};
+
+//Get the overall sum/Total
+overallSum = () => {
+    var arr = document.getElementsByName("amount");
+    var total = 0;
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].value) {
+            total += +arr[i].value;
+        }
+        document.getElementById("total").value = total;
+    }
+}
+
+//Delete row from the table
+tBody.addEventListener("click", (e) => {
+    let el = e.target;
+    const deleteROW = e.target.getAttribute("action");
+    if (deleteROW == "delete") {
+        delRow(el);
+        overallSum();
+    }
+})
+
+//Target row and remove from DOM;
+delRow = (el) => {
+    el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
+}
+
+// Function to calculate total with GST and Discount
+calculateTotal = () => {
+    let subTotal = parseFloat(document.getElementById('total').value);
+    let gst = parseFloat(document.getElementById('gst').value) || 0;
+    let discount = parseFloat(document.getElementById('discount').value) || 0;
+
+    // Calculate total with GST and Discount
+    let total = subTotal + (subTotal * gst / 100) - discount;
+
+    // Update the total input field
+    document.getElementById('total').value = total.toFixed(2);
+};
+
+// Function to download PDF
+function downloadPDF() {
+    // Code to download PDF goes here
+    // Example: You can use libraries like jsPDF to generate PDF and provide a download link
+    alert("PDF download functionality will be implemented here.");
+}
+
+// Function to update current date
+function updateCurrentDate() {
+    const currentDateElement = document.getElementById("currentDate");
+    const currentDate = new Date().toLocaleDateString();
+    currentDateElement.innerText = currentDate;
+}
+
+// Update current date when the page loads
+updateCurrentDate();

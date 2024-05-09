@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dynamic Invoice Generator</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Separate Bootstrap CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- Other CSS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Other meta tags, link tags, etc. -->
+</head>
+<body>
+    <!-- Body content -->
+    <!-- JavaScript scripts -->
+    <!-- Bootstrap JS script -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Other JavaScript files -->
+</body>
+</html>
